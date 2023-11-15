@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet>
+  <view uin="l12h4a0306or31o_v">
+    <property name="$name" value="MPCAbout" />
+    <property name="$defaultDiagram" value="True" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="delphi:e_class:src:weather:MPCAbout.TfrmAboutBox">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_field:src:weather:MPCAbout.TfrmAboutBox.panelVersionInfo" />
+      <reference referencedUin="delphi:e_field:src:weather:MPCAbout.TfrmAboutBox.memoVersionInfo" />
+      <reference referencedUin="delphi:e_field:src:weather:MPCAbout.TfrmAboutBox.panelCompanyName" />
+      <reference referencedUin="delphi:e_field:src:weather:MPCAbout.TfrmAboutBox.lblCompanyName" />
+      <reference referencedUin="delphi:e_field:src:weather:MPCAbout.TfrmAboutBox.lblCompanyMotto" />
+      <reference referencedUin="delphi:e_method:src:weather:MPCAbout.TfrmAboutBox.panelVersionInfoEnter" />
+    </reference>
+  </view>
+</nodeSet>

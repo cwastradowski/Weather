@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E46D5C12-39DD-4FC6-B333-2A74D0B45D0B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="weather.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="weather">
+        <MSBuild Projects="weather.dproj"/>
+    </Target>
+    <Target Name="weather:Clean">
+        <MSBuild Projects="weather.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="weather:Make">
+        <MSBuild Projects="weather.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="weather"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="weather:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="weather:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
