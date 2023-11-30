@@ -10,11 +10,9 @@ object frmSetup: TfrmSetup
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
+  Position = poMainFormCenter
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnHide = FormHide
-  PixelsPerInch = 96
   TextHeight = 13
   object dbGridStations: TDBGrid
     Left = 38
@@ -130,6 +128,7 @@ object frmSetup: TfrmSetup
       Width = 121
       Height = 21
       TabOrder = 0
+      OnChange = editChartDaysChange
     end
     object dbEditChartLineRainColor: TDBEdit
       Left = 88

@@ -68,7 +68,6 @@ type
     Label20: TLabel;
     Label21: TLabel;
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure dbEditChartLineHighColorDblClick(Sender: TObject);
     procedure dbEditChartLineLowColorDblClick(Sender: TObject);
     procedure dbEditChartLineHighColorChange(Sender: TObject);
@@ -84,6 +83,7 @@ type
     procedure simpleDSlImportTypeAfterPost(DataSet: TDataSet);
     procedure simpleDSStationsAfterPost(DataSet: TDataSet);
     procedure simpleDSStationsAfterDelete(DataSet: TDataSet);
+    procedure editChartDaysChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -163,6 +163,16 @@ begin
   end;
 end;
 
+procedure TfrmSetup.editChartDaysChange(Sender: TObject);
+var
+  reg: TRegIniFile;
+begin
+  // Update the registry
+  reg := TRegIniFile.Create('software\mpc\weather');
+  reg.WriteInteger('Chart', 'Days', StrToInt(editChartDays.Text));
+  reg.Free;
+end;
+
 procedure TfrmSetup.editNewImportTypeNameChange(Sender: TObject);
 var
   spImportType : TSimpleDataSet;
@@ -189,16 +199,6 @@ begin
   simpleDSStations.Active := True;
   simpleDSlImportType.Active := True;
   simpleDSlImportData.Active := True;
-end;
-
-procedure TfrmSetup.FormDestroy(Sender: TObject);
-var
-  reg: TRegIniFile;
-begin
-  // Update the registry
-  reg := TRegIniFile.Create('software\mpc\weather');
-  reg.WriteInteger('Chart', 'Days', StrToInt(editChartDays.Text));
-  reg.Free;
 end;
 
 procedure TfrmSetup.FormHide(Sender: TObject);

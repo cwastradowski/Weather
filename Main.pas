@@ -201,9 +201,9 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var
   sVersion : String;
 begin
-  sAppVersion := '6.6.7';
+  sAppVersion := '6.6.8';
   sDelphiVersion := '11.3 Alexandria';
-  sAboutBuildDate := '11/4/2023';
+  sAboutBuildDate := '11/30/2023';
 
 
   bStatsControlsCreated := False;
