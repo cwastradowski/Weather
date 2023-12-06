@@ -155,13 +155,16 @@
             <Form>frmAboutBox</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\..\MPC Common Files\MPCCommonUnits\mpcRegistry.pas">
+            <Form>$R</Form>
+        </DCCReference>
         <DCCReference Include="unitStats.pas">
             <Form>$R *.RES</Form>
         </DCCReference>
         <DCCReference Include="unitSetup.pas">
             <Form>frmSetup</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="unitGlobal.pas"/>
         <None Include="weather.todo"/>
         <None Include="..\ObjRepository\MPCAbout"/>
         <BuildConfiguration Include="Base">
@@ -235,6 +238,12 @@
             <ModelSupport>False</ModelSupport>
             <Deployment Version="4">
                 <DeployFile LocalName="..\ObjRepository\MPCAbout" Configuration="Debug" Class="ProjectFile"/>
+                <DeployFile LocalName="..\ObjRepository\MPCAbout" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\ObjRepository\MPCAbout" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -249,6 +258,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Win64\Debug\weather.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="Win64\Debug\weather.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>weather.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="weather.todo" Configuration="Debug" Class="ProjectFile"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="OSX32">

@@ -12,8 +12,10 @@ uses
   mpcSQL in '..\..\MPC Common Files\MPCCommonUnits\mpcSQL.pas',
   unitImport in 'unitImport.pas' {frmImport},
   MPCABOUT in '..\ObjRepository\MPC About Box\MPCABOUT.pas' {frmAboutBox},
+  mpcRegistry in '..\..\MPC Common Files\MPCCommonUnits\mpcRegistry.pas',
   unitStats in 'unitStats.pas' {$R *.RES},
-  unitSetup in 'unitSetup.pas' {frmSetup};
+  unitSetup in 'unitSetup.pas' {frmSetup},
+  unitGlobal in 'unitGlobal.pas';
 
 {$R *.RES}
 
@@ -21,6 +23,7 @@ BEGIN
  Application.Initialize;
  Application.Title := 'Weather';
  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmSetup, frmSetup);
   Application.CreateForm(TfrmSetup, frmSetup);
   Application.CreateForm(TfrmSetup, frmSetup);
   //Application.CreateForm(TfrmSetup, frmMPCAboutBox);

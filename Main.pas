@@ -9,7 +9,7 @@ uses
   Series, TeeProcs, Chart, DBChart, StdCtrls, TeeFunci, ComCtrls, Registry,
   DBClient, Provider,  DateUtils, WideStrings, FMTBcd,
   SqlExpr, Data.DBXMSSQL, SimpleDS, Data.DB, Vcl.ExtCtrls, System.Actions,
-  FmPosIni,mpcUserName,ShellAPI;
+  FmPosIni,mpcUserName,ShellAPI,mpcRegistry;
 
 type
   TfrmMain = class(TForm)
@@ -201,9 +201,9 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var
   sVersion : String;
 begin
-  sAppVersion := '6.6.8';
+  sAppVersion := '6.6.9';
   sDelphiVersion := '11.3 Alexandria';
-  sAboutBuildDate := '11/30/2023';
+  sAboutBuildDate := '12/6/2023';
 
 
   bStatsControlsCreated := False;
@@ -1117,37 +1117,29 @@ end;
 {$REGION 'Registry Functions'}
 
 procedure TfrmMain.GetReg;
-var
-  reg: TRegIniFile;
 begin
-  reg := TRegIniFile.Create('software\mpc\weather');
-  iChartDays := reg.ReadInteger('Chart', 'Days', 50);
-  frmMain.Top := reg.ReadInteger('Form', 'Top', frmMain.Top);
-  frmMain.Left := reg.ReadInteger('Form', 'Left', frmMain.Left);
-  frmMain.Width := reg.ReadInteger('Form', 'Width', frmMain.Width);
-  frmMain.Height := reg.ReadInteger('Form', 'Height', frmMain.Height);
-  actOnTop.checked := reg.ReadBool('Form', 'OnTop', False);
-  cbCompareToDate.checked := reg.ReadBool('Query', 'CompareToDate', False);
+  iChartDays := TmpcRegistry.mpcRegRead('Chart\days',365);
+  frmMain.Top := TmpcRegistry.mpcRegRead('Form\Top', frmMain.Top);
+  frmMain.Left := TmpcRegistry.mpcRegRead('Form\Left',frmMain.Left);
+  frmMain.Width := TmpcRegistry.mpcRegRead('Form\Width', frmMain.Width);
+  frmMain.Height := TmpcRegistry.mpcRegRead('Form\Height', frmMain.Height);
+  actOnTop.checked := TmpcRegistry.mpcRegRead('Form\OnTop', False);
+  cbCompareToDate.checked := TmpcRegistry.mpcRegRead('Query\CompareToDate', False);
   if actOnTop.checked = True then
     frmMain.FormStyle := fsStayOnTop
   else
     frmMain.FormStyle := fsNormal;
-  reg.Free;
 end;
 
 procedure TfrmMain.SetReg;
-var
-  reg: TRegIniFile;
 begin
-  // Write the chart end values to the registry
-  reg := TRegIniFile.Create('software\mpc\weather');
-  reg.WriteInteger('Form', 'Top', frmMain.Top);
-  reg.WriteInteger('Form', 'Left', frmMain.Left);
-  reg.WriteInteger('Form', 'Width', frmMain.Width);
-  reg.WriteInteger('Form', 'Height', frmMain.Height);
-  reg.WriteBool('Form', 'OnTop', actOnTop.checked);
-  reg.WriteBool('Query', 'CompareToDate', cbCompareToDate.checked);
-  reg.Free;
+  //TmpcRegistry.mpcRegWrite('Chart\days',StrToInt(editChartDays.text));
+  TmpcRegistry.mpcRegWrite('Form\Top', frmMain.Top);
+  TmpcRegistry.mpcRegWrite('Form\Left', frmMain.Left);
+  TmpcRegistry.mpcRegWrite('Form\Width', frmMain.Width);
+  TmpcRegistry.mpcRegWrite('Form\Height', frmMain.Height);
+  TmpcRegistry.mpcRegWrite('Form\OnTop', actOnTop.checked);
+  TmpcRegistry.mpcRegWrite('Query\CompareToDate', cbCompareToDate.checked);
 end;
 {$ENDREGION}
 

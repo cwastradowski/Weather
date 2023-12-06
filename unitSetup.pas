@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Registry, StdCtrls, ComCtrls, Grids,
   DirOutln, strUtils, DBCtrls, DBGrids, Mask,
-  SimpleDS, Datasnap.DBClient, Data.DB, Vcl.ExtCtrls, Data.DBXMSSQL;
+  SimpleDS, Datasnap.DBClient, Data.DB, Vcl.ExtCtrls, Data.DBXMSSQL,mpcRegistry;
 
 type
   TfrmSetup = class(TForm)
@@ -164,13 +164,8 @@ begin
 end;
 
 procedure TfrmSetup.editChartDaysChange(Sender: TObject);
-var
-  reg: TRegIniFile;
 begin
-  // Update the registry
-  reg := TRegIniFile.Create('software\mpc\weather');
-  reg.WriteInteger('Chart', 'Days', StrToInt(editChartDays.Text));
-  reg.Free;
+  TmpcRegistry.mpcRegWrite('Chart\days',StrToInt(editChartDays.text));
 end;
 
 procedure TfrmSetup.editNewImportTypeNameChange(Sender: TObject);
@@ -189,13 +184,8 @@ begin
 end;
 
 procedure TfrmSetup.FormCreate(Sender: TObject);
-var
-  reg: TRegIniFile;
 begin
-  // Read the registry
-  reg := TRegIniFile.Create('software\mpc\weather');
-  editChartDays.Text := IntToStr(reg.ReadInteger('Chart', 'Days', 730));
-  reg.Free;
+  editChartDays.Text := IntToStr(TmpcRegistry.mpcRegRead('Chart\days',735));
   simpleDSStations.Active := True;
   simpleDSlImportType.Active := True;
   simpleDSlImportData.Active := True;
